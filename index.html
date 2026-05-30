@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartScent | Bathroom Scent Specialist</title>
+  <meta name="description" content="SmartScent ออกแบบมาเพื่อแก้ปัญหากลิ่นไม่พึงประสงค์ในห้องน้ำโดยเฉพาะ">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/SmartScent_logo.png">
+  <link rel="apple-touch-icon" href="images/SmartScent_logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Section Specific Styles added directly here for now to keep it contained, could be moved to main.css later */
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 88px; background: url('images/background.png') center/cover no-repeat; }
+    .hero-split { display: flex; flex-wrap: wrap; height: 100%; width: 100%; position: relative; z-index: 1; }
+    .hero-content { flex: 1; padding-right: var(--space-xl); display: flex; flex-direction: column; justify-content: center; min-width: 300px;}
+    .hero-visual { flex: 1; background: url('images/hero_banner.png') center/cover; min-width: 300px; border-radius: var(--radius-lg); margin-left: var(--space-md); position: relative; z-index: 1;}
+    .trust-row { display: flex; gap: var(--space-md); margin-top: var(--space-xl); color: var(--text-light); }
+    .trust-item { display: flex; align-items: center; gap: var(--space-xs); }
+    .trust-item svg { width: 20px; height: 20px; color: var(--smart-blue); }
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding-top: 100px; padding-bottom: var(--space-xl); }
+      .hero-split { flex-direction: column-reverse; }
+      .hero-visual { width: 100%; margin-left: 0; margin-bottom: var(--space-lg); aspect-ratio: 1 / 1; flex: none; }
+      .hero-content { padding-right: 0; text-align: center; align-items: center; }
+      .trust-row { justify-content: center; flex-wrap: wrap; }
+    }
+
+    /* Snowflakes */
+    .snowflakes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+    .snowflake { position: absolute; color: rgba(255, 255, 255, 0.9); }
+    .sf-spin { width: 100%; height: 100%; }
+    .sf-spin svg { width: 100%; height: 100%; }
+    
+    .sf-bg { top: 15%; left: 8%; width: 40px; height: 40px; opacity: 0.15; filter: blur(3px); animation: float-1 14s ease-in-out infinite alternate; }
+    .sf-bg .sf-spin { animation: spin 35s linear infinite; }
+    
+    .sf-bg2 { top: 30%; right: 10%; width: 30px; height: 30px; opacity: 0.1; filter: blur(4px); animation: float-2 18s ease-in-out infinite alternate-reverse; }
+    .sf-bg2 .sf-spin { animation: spin 45s linear infinite reverse; }
+    
+    .sf-mg { bottom: 25%; left: 45%; width: 80px; height: 80px; opacity: 0.25; filter: blur(1px); animation: float-3 12s ease-in-out infinite alternate; }
+    .sf-mg .sf-spin { animation: spin 25s linear infinite; }
+    
+    .sf-fg { bottom: -5%; right: 40%; width: 150px; height: 150px; opacity: 0.05; filter: blur(0px); animation: float-1 10s ease-in-out infinite alternate-reverse; }
+    .sf-fg .sf-spin { animation: spin 40s linear infinite reverse; }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes float-1 { 100% { transform: translate(30px, -40px); } }
+    @keyframes float-2 { 100% { transform: translate(-40px, 30px); } }
+    @keyframes float-3 { 100% { transform: translate(-20px, -60px); } }
+
+    /* The Problem */
+    .problem-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-md); margin-top: var(--space-xl); }
+    @media (max-width: 600px) {
+      .problem-cards { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
+      .problem-cards .card { padding: var(--space-sm); }
+      .problem-cards .headline-3 { font-size: 1rem; }
+      .problem-cards .subheadline { font-size: 0.75rem; }
+    }
+    .card { background: var(--white); padding: var(--space-md); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); transition: var(--transition-normal); }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    
+    /* Why Scent Matters */
+    .insight-split { display: flex; gap: var(--space-xl); flex-wrap: wrap; }
+    .insight-left { flex: 1; min-width: 300px; }
+    .insight-right { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: var(--space-md); }
+
+    /* Solution */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-lg); text-align: center; margin-top: var(--space-md); }
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+    }
+    .feature-card { background: var(--white); padding: var(--space-lg) var(--space-md); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); transition: var(--transition-normal); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .feature-icon { width: 64px; height: 64px; background-color: #F0F4F8; color: var(--smart-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md); }
+    .feature-icon svg { width: 32px; height: 32px; }
+
+    /* Multi Function */
+    .multi-function-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-top: var(--space-xl); }
+    .mf-card { height: 250px; background-color: var(--soft-gray); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--text-light); }
+
+    /* Footer */
+    .footer { background-color: var(--white); padding: var(--space-xl) 0 var(--space-md); margin-top: var(--space-xl); position: relative; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 2fr; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-bottom { padding-top: var(--space-md); display: flex; justify-content: space-between; color: var(--text-light); font-size: 0.875rem; }
+    .back-to-top { position: absolute; top: -25px; right: var(--space-md); width: 50px; height: 50px; background-color: #007BFF; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; box-shadow: 0 4px 10px rgba(0,123,255,0.3); transition: transform 0.2s; }
+    .back-to-top:hover { transform: scale(1.1); }
+    .social-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 700; }
+    .social-icon { width: 28px; height: 28px; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <!-- SECTION 01: GLOBAL NAVIGATION -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <a href="#"><img src="images/SmartScent_logo.png" alt="SmartScent Logo" onerror="this.src='https://placehold.co/150x40/2D5DA8/FFF?text=SmartScent'"></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#collection">Products</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://line.me/R/ti/p/@smartscent" target="_blank" class="btn" style="background-color: #00B900; color: white; border: none; padding: 10px 24px; font-weight: 600; border-radius: 999px; box-shadow: 0 4px 10px rgba(0, 185, 0, 0.2); display: flex; align-items: center; gap: 8px;">
+          <img src="images/lineOA.png" alt="Line" style="width: 24px; height: 24px; object-fit: contain; border-radius: 50%;">
+          SmartScent
+        </a>
+      </div>
+      <div class="hamburger">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 02: HERO -->
+  <section class="hero" style="position: relative; overflow: hidden;">
+    <!-- Snowflakes Background Layer -->
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake sf-bg"><div class="sf-spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-2.5-2.5L5 20"/><path d="M12 22V2"/><path d="m14 20 2.5-2.5L19 20"/><path d="m14 4 2.5 2.5L19 4"/><path d="m10 4-2.5 2.5L5 4"/><path d="M2 12h20"/><path d="m20 16-2.5-2.5L20 10"/><path d="m4 10 2.5 2.5L4 16"/></svg></div></div>
+      <div class="snowflake sf-bg2"><div class="sf-spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-2.5-2.5L5 20"/><path d="M12 22V2"/><path d="m14 20 2.5-2.5L19 20"/><path d="m14 4 2.5 2.5L19 4"/><path d="m10 4-2.5 2.5L5 4"/><path d="M2 12h20"/><path d="m20 16-2.5-2.5L20 10"/><path d="m4 10 2.5 2.5L4 16"/></svg></div></div>
+      <div class="snowflake sf-mg"><div class="sf-spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-2.5-2.5L5 20"/><path d="M12 22V2"/><path d="m14 20 2.5-2.5L19 20"/><path d="m14 4 2.5 2.5L19 4"/><path d="m10 4-2.5 2.5L5 4"/><path d="M2 12h20"/><path d="m20 16-2.5-2.5L20 10"/><path d="m4 10 2.5 2.5L4 16"/></svg></div></div>
+      <div class="snowflake sf-fg"><div class="sf-spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-2.5-2.5L5 20"/><path d="M12 22V2"/><path d="m14 20 2.5-2.5L19 20"/><path d="m14 4 2.5 2.5L19 4"/><path d="m10 4-2.5 2.5L5 4"/><path d="M2 12h20"/><path d="m20 16-2.5-2.5L20 10"/><path d="m4 10 2.5 2.5L4 16"/></svg></div></div>
+    </div>
+
+    <div class="container hero-split">
+      <div class="hero-content fade-up">
+        <span class="eyebrow">Bathroom Scent Specialist</span>
+        <h1 class="headline-1" style="margin: var(--space-sm) 0;">ห้องน้ำสะอาด<br>อาจยังไม่พอ</h1>
+        <p class="subheadline" style="margin-bottom: var(--space-lg);">กลิ่นคือสิ่งแรกที่ผู้ใช้งานรับรู้<br>SmartScent ถูกออกแบบมาเพื่อแก้ปัญหากลิ่นไม่พึงประสงค์ในห้องน้ำโดยเฉพาะ</p>
+        <div style="display: flex; gap: var(--space-sm);">
+          <a href="#shopee" target="_blank" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/Shopee_BT.png" alt="Shopee" style="object-fit: contain; display: block; max-width: 100%;">
+          </a>
+          <a href="#lazada" target="_blank" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/Lazada_BT.png" alt="Lazada" style="object-fit: contain; display: block; max-width: 100%;">
+          </a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>โดนน้ำได้</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>แขวนได้</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>วางได้</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>ติดตั้งง่าย</div>
+        </div>
+      </div>
+      <div class="hero-visual fade-up" style="transition-delay: 200ms;"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 03: THE PROBLEM -->
+  <section class="section bg-soft-gray">
+    <div class="container fade-up">
+      <h2 class="headline-2" style="text-align: center; max-width: 600px; margin: 0 auto;">คุณเคยลังเลที่จะเข้าห้องน้ำ เพราะกลิ่นหรือไม่?</h2>
+      <div class="problem-cards">
+        <div class="card">
+          <h3 class="headline-3" style="margin-bottom: var(--space-xs);">กลิ่นอับ</h3>
+          <p class="subheadline">ความชื้นสะสมที่ทำให้บรรยากาศอึดอัด</p>
+        </div>
+        <div class="card">
+          <h3 class="headline-3" style="margin-bottom: var(--space-xs);">กลิ่นฉุน</h3>
+          <p class="subheadline">สารเคมีแรงๆ ที่กลบกลิ่นแต่ทำลายสุขภาพ</p>
+        </div>
+        <div class="card">
+          <h3 class="headline-3" style="margin-bottom: var(--space-xs);">กลิ่นสะสม</h3>
+          <p class="subheadline">กลิ่นฝังลึกที่แก้เท่าไหร่ก็ไม่หายขาด</p>
+        </div>
+        <div class="card">
+          <h3 class="headline-3" style="margin-bottom: var(--space-xs);">กลิ่นจากท่อ</h3>
+          <p class="subheadline">ปัญหากวนใจที่มักเกิดในห้องน้ำสาธารณะ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04: WHY SCENT MATTERS -->
+  <section class="section">
+    <div class="container insight-split fade-up">
+      <div class="insight-left">
+        <h2 class="headline-2" style="margin-bottom: var(--space-md);">กลิ่นคือประสบการณ์แรก<br>ของห้องน้ำ</h2>
+        <p class="subheadline">ก่อนจะเห็นความสะอาด ผู้คนมักรับรู้ผ่านกลิ่นก่อนเสมอ กลิ่นส่งผลต่อความรู้สึกและภาพลักษณ์โดยตรง</p>
+      </div>
+      <div class="insight-right">
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="headline-3">Comfort</span>
+          <span class="subheadline">ความรู้สึกสบายใจ</span>
+        </div>
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="headline-3">Confidence</span>
+          <span class="subheadline">ความมั่นใจในการใช้งาน</span>
+        </div>
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="headline-3">Impression</span>
+          <span class="subheadline">ภาพลักษณ์ที่ดีของสถานที่</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 05: MULTI-FUNCTION -->
+  <section class="section bg-soft-gray" id="solutions">
+    <div class="container fade-up">
+      <h2 class="headline-2" style="text-align: center; margin-bottom: var(--space-xl);">หนึ่งผลิตภัณฑ์หลากหลายการใช้งาน</h2>
+      <div style="text-align: center; width: 100%;">
+        <img src="images/functions.png" alt="Multi-Function Uses" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 06: SOLUTION -->
+  <section class="section" id="features">
+    <div class="container fade-up">
+      <h2 class="headline-2" style="text-align: center; margin-bottom: var(--space-xl);">ออกแบบมาเพื่อห้องน้ำโดยเฉพาะ</h2>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3"/><path d="M7 5h10v6a5 5 0 0 1-10 0V5z"/><path d="M9 9v3a3 3 0 0 0 6 0V9"/></svg></div>
+          <h4 style="font-size: 1.125rem;">วางได้</h4>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2"/><path d="M12 8v8a3 3 0 0 0 6 0v-2"/></svg></div>
+          <h4 style="font-size: 1.125rem;">แขวนได้</h4>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></div>
+          <h4 style="font-size: 1.125rem;">โดนน้ำได้</h4>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+          <h4 style="font-size: 1.125rem;">ไม่ใช้ไฟฟ้า</h4>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h4 style="font-size: 1.125rem;">ติดตั้งง่าย</h4>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 07: SCENT COLLECTION -->
+  <section class="section bg-soft-gray" id="collection">
+    <div class="container fade-up">
+      <h2 class="headline-2" style="text-align: center; margin-bottom: var(--space-xl);">เลือกกลิ่นที่เหมาะกับคุณ</h2>
+      
+      <div class="tabs">
+        <button class="tab-btn active" data-target="original-series">Original Series</button>
+        <button class="tab-btn" data-target="premium-series">Premium Series <span class="tab-badge">New</span></button>
+      </div>
+
+      <div class="tab-content active" id="original-series">
+        <div class="product-grid">
+          <!-- Original 01 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-original">Original</span>
+              <img src="images/products/original_set/Original_Series_01.jpg" alt="Fruity">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Fruity</h3>
+              <p class="product-desc">กลิ่นหอมผลไม้สดใส ปลุกพลังบวก ตั้งแต่เช้า ฟีลสนุก สดชื่น เหมือนวันแดดดีๆ</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Original 02 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-original">Original</span>
+              <img src="images/products/original_set/Original_Series_02.jpg" alt="Aqua">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Aqua</h3>
+              <p class="product-desc">กลิ่นหอมเย็น สบาย ให้ความรู้สึก สะอาด สดชื่น ตั้งแต่ได้กลิ่น</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Original 03 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-original">Original</span>
+              <img src="images/products/original_set/Original_Series_03.jpg" alt="Lavender">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Lavender</h3>
+              <p class="product-desc">กลิ่นหอมทำให้รู้สึกผ่อนคลาย เหมือนพักผ่อนในรีสอร์ท เงียบๆ ช่วยให้ใจนิ่ง และวันเหนื่อยๆ เบาลง</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Original 04 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-original">Original</span>
+              <img src="images/products/original_set/Original_Series_04.jpg" alt="Strawberry">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Strawberry</h3>
+              <p class="product-desc">กลิ่นหอมหวานละมุน น่ารักแบบไม่เลี่ยน เติมบรรยากาศ ให้อบอุ่นขึ้นทันที</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="premium-series">
+        <div class="product-grid">
+          <!-- Premium 01 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_01.jpg" alt="White Tea & Ginger">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">White Tea & Ginger</h3>
+              <p class="product-desc">กลิ่นหอมสะอาดเรียบหรู ดูแพงแบบโรงแรม ชาอ่อนๆ ผสานความอุ่นละมุมของขิง </p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Premium 02 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_02.jpg" alt="Pear & Floral">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Pear & Floral</h3>
+              <p class="product-desc">กลิ่นแพร์ใสๆ ผสานดอกไม้หอมละมุน สุภาพ อ่อนโยน แต่มีเสนห์น่าจดจำ</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Premium 03 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_03.jpg" alt="Melon Yoghurt">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Melon Yoghurt</h3>
+              <p class="product-desc">กลิ่นหอมหวาน นุ่มละมุน สดใสกำลังดี ฟีลขนมเย็นๆ ในวันแดดอุ่น</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Premium 04 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_04.jpg" alt="Lemongrass Thai Spa">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Lemongrass Thai Spa</h3>
+              <p class="product-desc">กลิ่นตะไคร้หอมอโรม่า ฟีลสปาไทยๆ ช่วยรีเซ็ตความเครียดตั้งแต่ ลมหายใจแรก</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Premium 05 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_05.jpg" alt="Sport Perfume">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Sport Perfume</h3>
+              <p class="product-desc">กลิ่นหอมรีเฟรช เรียบหรูสไตล์สปอร์ต มั่นใจ สดสะอาด พร้อมลุยทุกกิจกรรม</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+          <!-- Premium 06 -->
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <span class="badge badge-premium">Premium</span>
+              <img src="images/products/premium_set/Premium_Series_06.jpg" alt="Gentleman Perfume">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Gentleman Perfume</h3>
+              <p class="product-desc">กลิ่นหอม สุขุม เข้ม เท่ห์ แบบแมนๆ ที่น่าจดจำ ทุกสถานการณ์ สไตล์น้ำหอมแบรนด์เนม</p>
+              <a href="#" class="btn btn-secondary" style="width: 100%;">ซื้อเลย</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: SOCIAL PROOF (TESTIMONIALS) -->
+  <section class="section" id="testimonials" style="padding-bottom: 0;">
+    <div class="container fade-up">
+      <h2 class="headline-2" style="text-align: center; margin-bottom: var(--space-sm);">เสียงตอบรับจากผู้ใช้งานจริง</h2>
+      <p class="subheadline" style="text-align: center; margin-bottom: var(--space-xl);">ความประทับใจจากลูกค้ากว่า 1,000+ ราย ที่เลือกใช้ SmartScent</p>
+    </div>
+    
+    <div class="marquee-container fade-up" style="transition-delay: 200ms;">
+      <div class="marquee-content">
+        <!-- Review images will be dynamically injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 12: FINAL CTA -->
+  <section class="section" style="background: linear-gradient(135deg, var(--smart-blue), var(--smart-blue-hover)); color: white; text-align: center;">
+    <div class="container fade-up">
+      <h2 class="headline-1" style="margin-bottom: var(--space-sm);">ทุกครั้งหลังทำความสะอาดห้องน้ำ<br>อย่าลืม SmartScent</h2>
+      <p class="subheadline" style="color: rgba(255,255,255,0.8); margin-bottom: var(--space-lg); max-width: 600px; margin-inline: auto;">ขั้นตอนเล็ก ๆ ที่ช่วยเปลี่ยนห้องน้ำธรรมดา ให้กลายเป็นพื้นที่ที่น่าใช้งานมากขึ้น</p>
+      <div style="display: flex; gap: var(--space-sm); justify-content: center; align-items: center;">
+        <a href="#shopee" target="_blank" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="images/Shopee_BT.png" alt="Shopee" style="object-fit: contain; display: block; max-width: 100%;">
+        </a>
+        <a href="#lazada" target="_blank" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="images/Lazada_BT.png" alt="Lazada" style="object-fit: contain; display: block; max-width: 100%;">
+        </a>
+      </div>
+      <p style="margin-top: var(--space-lg); font-size: 1.25rem; font-style: italic; color: rgba(255,255,255,0.95); font-weight: 500;">"สมาร์ท เซนท์ ความสุขของคนรักความหอม"</p>
+    </div>
+  </section>
+
+  <!-- SECTION 13: FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="container" style="position: relative;">
+      <!-- Back to top button -->
+      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to top">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+      </button>
+
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div style="padding-top: var(--space-md);">
+          <h3 class="headline-3" style="font-weight: 500; font-size: 1.5rem; margin-bottom: var(--space-lg); line-height: 1.4; color: #1a202c;">ผลิตโดย บริษัท สมาร์ท เซนท์<br>คอร์ปอเรชั่น จำกัด</h3>
+          <p style="font-size: 0.875rem; color: #4a5568; line-height: 1.8; font-weight: 500;">
+            888/90 หมู่ 19 ซ.ยิ่งเจริญ ถ.บางพลี-ตำหรุ ต.บางพลีใหญ่<br>
+            อ.บางพลี จ.สมุทรปราการ 10540
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div style="padding-top: var(--space-md); color: #718096; font-size: 0.875rem; font-weight: 600; display: flex; flex-direction: column; gap: 16px;">
+          <a href="#collection" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Products</a>
+          <a href="#solutions" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Solutions</a>
+          <a href="#testimonials" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Testimonials</a>
+          <a href="#contact" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Contact</a>
+        </div>
+
+        <!-- Col 3 -->
+        <div style="padding-top: var(--space-md);">
+          <!-- QR & Phone Block -->
+          <div style="display: flex; gap: var(--space-lg); align-items: center; margin-bottom: var(--space-lg);">
+            <div style="width: 120px; height: 120px; border: 1px solid #e2e8f0; padding: 4px;">
+              <img src="images/social/AddLineQR.png" alt="Line QR" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div>
+              <p style="font-size: 0.875rem; font-weight: 700; color: #4a5568; margin-bottom: 4px;">เบอร์ติดต่อบริการหลังการขาย</p>
+              <p style="font-size: 1.75rem; font-weight: 700; color: #2d3748; margin-bottom: 4px; letter-spacing: 1px;">063-546-1656</p>
+              <p style="font-size: 0.75rem; color: #718096; font-weight: 500;">( จ - ศ 09.00น. - 17.00น. )</p>
+            </div>
+          </div>
+          
+          <!-- Social Icons -->
+          <div>
+            <div class="social-row">
+              <a href="#" style="display: inline-flex;"><img src="images/social/IG_icon.png" alt="IG" class="social-icon"></a>
+              <a href="#" style="display: inline-flex;"><img src="images/social/Tiktok_icon.png" alt="Tiktok" class="social-icon"></a>
+              <span style="margin-left: 8px; color: #2d3748; font-size: 1.125rem;">smartscentofficial</span>
+            </div>
+            <div class="social-row">
+              <a href="#" style="display: inline-flex;"><img src="images/social/FB_icon.png" alt="FB" class="social-icon"></a>
+              <span style="margin-left: 8px; color: #2d3748; font-size: 1.125rem;">SmartScent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p style="font-weight: 500;">&copy; 2026 SmartScent. All rights reserved.</p>
+        <div style="display: flex; gap: var(--space-md); font-weight: 500;">
+          <a href="#" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Privacy Policy</a>
+          <a href="#" style="transition: color 0.2s;" onmouseover="this.style.color='#2D5DA8'" onmouseout="this.style.color='#718096'">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Line OA Button -->
+  <a href="https://line.me/R/ti/p/@smartscent" target="_blank" class="floating-line-btn" aria-label="Add Line @smartscent">
+    <img src="images/lineOA.png" alt="Line OA" class="line-icon-img">
+  </a>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
